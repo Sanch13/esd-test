@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "esd-test"
+version = "0.1.0"
+description = ""
+authors = ["sanch13 <sanch13sanch@gmail.com>"]
+readme = "README.md"
+packages = [{include = "esd_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "3.2.16"
+pydantic = "^1.10.4"
+python-dotenv = "^0.21.1"
+psycopg2-binary = "^2.9.5"
+djangorestframework = "^3.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
