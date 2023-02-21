@@ -11,13 +11,14 @@ DEBUG = settings.DEBUG
 ALLOWED_HOSTS = [settings.ALLOWED_HOSTS]
 
 INSTALLED_APPS = [
+    'esd.apps.EsdConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'esd',
+    'users.apps.UsersConfig'
 ]
 
 MIDDLEWARE = [
@@ -35,7 +36,8 @@ ROOT_URLCONF = 'test_esd.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -50,24 +52,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'test_esd.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': settings.ENGINE,
-        'NAME': settings.NAME_DB,
-        'USER': settings.USER,
-        'PASSWORD': settings.PASSWORD,
-        'HOST': settings.HOST,
-        'PORT': settings.PORT,
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'esd_db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': settings.ENGINE,
+#         'NAME': settings.NAME_DB,
+#         'USER': settings.USER,
+#         'PASSWORD': settings.PASSWORD,
+#         'HOST': settings.HOST,
+#         'PORT': settings.PORT,
+#
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -84,7 +86,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -95,9 +97,19 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTH_USER_MODEL = "users.User"    # переопределение базовой модели
