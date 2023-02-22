@@ -3,11 +3,32 @@
     padding-bottom: 20px;
 }
 
+.name-user {
+    font-family: "Droid Sans Mono Dotted", fantasy;
+    font-size: 1.3em;
+    color: #67a13e;
+    position: relative;
+    left: 10px;
+}
+
+.text-1 {
+    text-align: center;
+    padding: 15px 15px;
+}
+
 .just-text {
     padding: 15px 15px;
     margin: 0 auto;
     text-align: center;
-    font-size: 2em;
+    font-size: 1.1em;
+}
+
+.col-12 {
+    text-align: center;
+}
+
+.row {
+    justify-content: center;
 }
 
 nav {

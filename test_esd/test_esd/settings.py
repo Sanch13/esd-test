@@ -10,15 +10,21 @@ DEBUG = settings.DEBUG
 
 ALLOWED_HOSTS = [settings.ALLOWED_HOSTS]
 
+AUTH_USER_MODEL = "users.User"    # переопределение базовой модели
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 INSTALLED_APPS = [
-    'esd.apps.EsdConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'esd.apps.EsdConfig',
     'users.apps.UsersConfig'
+
 ]
 
 MIDDLEWARE = [
@@ -107,9 +113,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-AUTH_USER_MODEL = "users.User"    # переопределение базовой модели

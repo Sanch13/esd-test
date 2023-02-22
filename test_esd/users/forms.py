@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
 from django import forms
 
 from users.models import User
@@ -32,10 +32,10 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):  # Унаследовали форму от Джанго
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Введите имя'
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Введите имя '
                                                                             'пользователя'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль'}))
-    # переопределяем  username, password из стандартной формы Джанго
+    # переопределяем username, password из стандартной формы Джанго
 
     class Meta:
         model = User
