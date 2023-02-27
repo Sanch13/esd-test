@@ -2,7 +2,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.contrib import messages, auth
-from django.views import View
 
 from users.forms import *
 
@@ -48,9 +47,3 @@ def login(request):
         form = UserLoginForm()
     context = {'form': form}
     return render(request, 'users/registration/login.html', context=context)
-
-
-# def password_reset(request):
-#     if request.method == 'POST':
-#         form = UserPasswordReset()
-#         if form.is_valid():
