@@ -1,0 +1,13 @@
+{% extends 'esd/base.html' %}
+{% load static %}
+
+{% block title %}{{ Статистика }}{% endblock title %}
+
+{% block content %}
+    <h2>Здесь будет статистика пользователей</h2>
+    {% for user in users %}
+        <li>{{ user.tab_number }} -- {{ user.username }} | {{ user.first_name }} |
+            {{ user.last_name }} </li>
+
+    {% endfor %}
+{% endblock content %}

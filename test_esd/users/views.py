@@ -23,16 +23,6 @@ def registration(request):
     return render(request, 'users/registration/registration.html', context=context)
 
 
-# class Register(View):
-#
-#     template_name = 'users/registration/registration.html'
-#
-#     def get(self, request):
-#         context = {
-#             'form': UserRegistrationForm()
-#         }
-#         return render(request, self.template_name, context=context)
-
 def login(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)

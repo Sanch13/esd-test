@@ -27,8 +27,8 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page"
                        href="{% url 'index' %}">Главная</a>
-                    <a class="nav-link" href="#">Пройти тест</a>
-                    <a class="nav-link" href="#">Статистика</a>
+                    <a class="nav-link" href="{% url 'esd:esdtest' %}">Пройти тест</a>
+                    <a class="nav-link" href="{% url 'esd:statistic' %}">Статистика</a>
                     <a class="nav-link" href="{% url 'esd:about' %}">О сайте</a>
                     <a class="nav-link" href="{% url 'users:registration' %}">Регистрация</a>
                     {% if user.is_authenticated %}
