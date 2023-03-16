@@ -17,6 +17,6 @@
         </table>
     {% for user in users %}
         <li>{{ user.pk }}|{{ user.tab_number }} | {{ user.username }} | {{ user.first_name }} |
-            {{ user.last_name }} </li>
+            {{ user.last_name }} | {{ user.statistic.score }}</li>
     {% endfor %}
 {% endblock content %}

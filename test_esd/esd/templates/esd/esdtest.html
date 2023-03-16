@@ -6,72 +6,80 @@
 {% block content %}
     <h3>Здесь будет тест. Вопрос и 4 ответа с кнопками</h3>
 
-    <div id="timer"></div>
-    <script>
-        // установите начальное время таймера в миллисекундах
-        var timeLeft = 600000; // 10 минут
 
-        // обновление таймера каждую секунду
-        var x = setInterval(function () {
+    <div class="col-12">
+        <form method="get">
+            {% if user.is_authenticated %}
+                <button formaction="{% url 'esd:question' %}" class="btn btn-success"
+                        type="submit">Пройти тест
+                </button>
+            {% else %}
+                <h4>Вы не вошли в систему</h4>
+                <button class="btn btn-success" formaction="{% url 'users:login' %}"
+                        type="submit">Войти в систему</button>
 
-            // уменьшаем оставшееся время на 1 секунду
-            timeLeft -= 1000;
-
-            // вычисляем минуты и секунды из оставшегося времени
-            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            // отображение времени на странице
-            document.getElementById("timer").innerHTML = "Оставшиеся время " + minutes + " м " +
-                seconds + " с ";
-
-            // когда время истекает, выведите сообщение
-            if (timeLeft < 0) {
-                clearInterval(x);
-                document.getElementById("timer").innerHTML = "0м 0с";
-                alert("Время истекло!");
-            }
-        }, 1000);
-
-        // правильный ответ на вопрос
-        var correctAnswer = "a";
-
-        // функция для проверки ответа
-        function checkAnswer() {
-            // получаем выбранный ответ
-            var selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
-
-            // проверяем, правильный ли выбран ответ
-            if (selectedAnswer === correctAnswer) {
-                alert("Правильный ответ!");
-            } else {
-                alert("Неправильный ответ.");
-            }
-        }
-
-    </script>
-
-    <div>
-    {% for question in ten_questions %}
-        <div id="quiz">
-        <h3>{{ question }}</h3>
-        <input type="radio" name="answer" value="a" id="a">
-        <label for="a"></label><br>
-    {% endfor %}
-</div>
-
-    <div id="quiz">
-        <h3>Вопрос 1:</h3>
-        <p>Что такое JavaScript?</p>
-        <input type="radio" name="answer" value="a" id="a">
-        <label for="a">Язык программирования</label><br>
-        <input type="radio" name="answer" value="b" id="b">
-        <label for="b">Веб-браузер</label><br>
-        <input type="radio" name="answer" value="c" id="c">
-        <label for="c">Тип данных</label><br>
-        <input type="radio" name="answer" value="d" id="d">
-        <label for="d">Математическая функция</label><br>
-        <button onclick="checkAnswer()">Ответить</button>
+            {% endif %}
+        </form>
     </div>
+    {#    <div id="timer"></div>#}
+    {#    <script>#}
+    {#        // установите начальное время таймера в миллисекундах#}
+    {#        var timeLeft = 600000; // 10 минут#}
+    {##}
+    {#        // обновление таймера каждую секунду#}
+    {#        var x = setInterval(function () {#}
+    {##}
+    {#            // уменьшаем оставшееся время на 1 секунду#}
+    {#            timeLeft -= 1000;#}
+    {##}
+    {#            // вычисляем минуты и секунды из оставшегося времени#}
+    {#            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));#}
+    {#            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);#}
+    {##}
+    {#            // отображение времени на странице#}
+    {#            document.getElementById("timer").innerHTML = "Оставшиеся время " + minutes + " м " +#}
+    {#                seconds + " с ";#}
+    {##}
+    {#            // когда время истекает, выведите сообщение#}
+    {#            if (timeLeft < 0) {#}
+    {#                clearInterval(x);#}
+    {#                document.getElementById("timer").innerHTML = "0м 0с";#}
+    {#                alert("Время истекло!");#}
+    {#            }#}
+    {#        }, 1000);#}
+    {##}
+    {#        // правильный ответ на вопрос#}
+    {#        var correctAnswer = "a";#}
+    {##}
+    {#        // функция для проверки ответа#}
+    {#        function checkAnswer() {#}
+    {#            // получаем выбранный ответ#}
+    {#            var selectedAnswer = document.querySelector('input[name="answer"]:checked').value;#}
+    {##}
+    {#            // проверяем, правильный ли выбран ответ#}
+    {#            if (selectedAnswer === correctAnswer) {#}
+    {#                alert("Правильный ответ!");#}
+    {#            } else {#}
+    {#                alert("Неправильный ответ.");#}
+    {#            }#}
+    {#        }#}
+    {##}
+    {#    </script>#}
+    {##}
+    {#    <div>#}
+    {#    {% for question in question_list %}#}
+    {#        <div id="quiz">#}
+    {#        <h3>{{ question.question }}</h3>#}
+    {#        <input type="radio" name="answer" value="a" id="a">#}
+    {#        <label for="a">{{ question.answer_1 }}</label><br>#}
+    {#        <input type="radio" name="answer" value="a" id="a">#}
+    {#        <label for="b">{{ question.answer_2 }}</label><br>#}
+    {#        <input type="radio" name="answer" value="a" id="a">#}
+    {#        <label for="c">{{ question.answer_3 }}</label><br>#}
+    {#        <input type="radio" name="answer" value="a" id="a">#}
+    {#        <label for="d">{{ question.answer_4 }}</label><br>#}
+    {#        </div>#}
+    {#    {% endfor %}#}
+    {#    </div>#}
 
 {% endblock content %}

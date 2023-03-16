@@ -1,0 +1,42 @@
+{% extends 'esd/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-xxl">
+        <form method="post" action="{% url 'esd:question' %}">
+            {% csrf_token %}
+            <div id="quiz">
+                    <h3>{{ question.question }}</h3>
+                    <input type="hidden" name="question_id" value="{{ question.id }}">
+                    <input type="radio" name="answer" value="{{ question.answer_1 }}" id="a">
+                    <label for="a">{{ question.answer_1 }}</label><br>
+                    <input type="radio" name="answer" value="{{ question.answer_2 }}" id="a">
+                    <label for="b">{{ question.answer_2 }}</label><br>
+                    <input type="radio" name="answer" value="{{ question.answer_3 }}" id="a">
+                    <label for="c">{{ question.answer_3 }}</label><br>
+                    <input type="radio" name="answer" value="{{ question.answer_4 }}" id="a">
+                    <label for="d">{{ question.answer_4 }}</label><br>
+                </div>
+
+
+{#            {% for test in question %}#}
+{#                <div id="quiz">#}
+{#                    <h3>{{ test.question }}</h3>#}
+{#                    <input type="hidden" name="question_id" value="{{ question.id }}">#}
+{#                    <input type="radio" name="answer" value="{{ test.answer_1 }}" id="a">#}
+{#                    <label for="a">{{ test.answer_1 }}</label><br>#}
+{#                    <input type="radio" name="answer" value="{{ test.answer_2 }}" id="a">#}
+{#                    <label for="b">{{ test.answer_2 }}</label><br>#}
+{#                    <input type="radio" name="answer" value="{{ test.answer_3 }}" id="a">#}
+{#                    <label for="c">{{ test.answer_3 }}</label><br>#}
+{#                    <input type="radio" name="answer" value="{{ test.answer_4 }}" id="a">#}
+{#                    <label for="d">{{ test.answer_4 }}</label><br>#}
+{#                </div>#}
+{#            {% endfor %}#}
+            <button class="btn btn-success" type="submit">Подтвердить ответ</button>
+
+            {#        <form action="{% url 'esd:question' %} " method="post">#}
+            {#            {% csrf_token %}#}
+        </form>
+    </div>
+{% endblock content %}
