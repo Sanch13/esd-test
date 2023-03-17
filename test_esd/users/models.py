@@ -8,3 +8,6 @@ class User(AbstractUser):
                               blank=True)
     tab_number = models.PositiveIntegerField(blank=True,
                                              null=True)
+
+    def __str__(self):
+        return self.get_full_name() or self.username

@@ -3,9 +3,11 @@
 
 {% block content %}
     <div class="container-xxl">
-    {% for obj in result %}
-        <h5>{{ obj.user.first_name }}  {{ obj.user.last_name }}  Your SCORE : {{ obj.score }}
-        points | {{ obj.date }} </h5>
-    {% endfor %}
+        <h3><i><b>{{ result.user.get_full_name }}</b></i> количество
+            набранных
+            баллов
+            за тест
+            состовляет : <b>{{ result.score }}</b>
+            баллов</h3>
     </div>
 {% endblock content %}

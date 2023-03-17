@@ -3,6 +3,7 @@ from service.middleware import *
 from django.shortcuts import render
 from esd.models import *
 from django.urls import reverse
+from django.db.models import Max, Subquery, OuterRef
 
 
 def index(request):
@@ -14,14 +15,19 @@ def about(request):
 
 
 def statistic(request):
-    # total = User.objects.all().count()
-    # list_pk = list(range(1, total + 1))
-    # users = User.objects.filter(pk__in=list_pk)
-    total = User.objects.all().count()
-    users = User.objects.all()
+    # Display latest statistics
+    total = User.objects.count()
+    latest_results = Statistic.objects.filter(
+        time_create__in=Subquery(
+            Statistic.objects.filter(user_id=OuterRef('user_id'))
+            .values('user_id')
+            .annotate(latest_time=Max('time_create'))
+            .values('latest_time')
+        )
+    ).select_related('user')
     context = {
-        'users': users,
         'total': total,
+        'latest_results': latest_results,
     }
     return render(request, 'esd/statistic.html', context=context)
 
@@ -55,7 +61,8 @@ def question(request):
 
 
 def score(request):
-    result = Statistic.objects.filter(pk=request.user.pk)
+    result = Statistic.objects.filter(user_id=request.user.pk).order_by('-time_create').first()
+    # Display the latest user data with the test passed
     context = {
         'result': result
     }

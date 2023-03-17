@@ -5,18 +5,8 @@
 
 {% block content %}
     <h2>Здесь будет статистика пользователей</h2>
-    <h5>Количество записей в БД {{ total }}</h5>
-        <table>
-        <thead style="background: yellowgreen">
-        <th>ID|</th>
-        <th>Табельный номер|</th>
-        <th>Имя пользователя|</th>
-        <th>Имя|</th>
-        <th>Фамилия</th>
-        </thead>
-        </table>
-    {% for user in users %}
-        <li>{{ user.pk }}|{{ user.tab_number }} | {{ user.username }} | {{ user.first_name }} |
-            {{ user.last_name }} | {{ user.statistic.score }}</li>
+    <h5>Количество пользователей в БД : <strong>{{ total }}</strong></h5>
+    {% for user in latest_results %}
+        <li>{{ user.user.get_full_name }} --- {{ user.score }} points | {{ user.time_create }}</li>
     {% endfor %}
 {% endblock content %}
